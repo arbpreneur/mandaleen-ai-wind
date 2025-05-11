@@ -188,7 +188,7 @@ function PureMultimodalInput({
   const { isAtBottom, scrollToBottom } = useScrollToBottom();
 
   useEffect(() => {
-    if (status === 'submitted') {
+    if (status === 'streaming') {
       scrollToBottom();
     }
   }, [status, scrollToBottom]);
@@ -358,7 +358,7 @@ function PureStopButton({
   return (
     <Button
       data-testid="stop-button"
-      className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
+      className="rounded-full p-1.5 h-fit border dark:border-zinc-600 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white shadow-md"
       onClick={(event) => {
         event.preventDefault();
         stop();
@@ -384,7 +384,7 @@ function PureSendButton({
   return (
     <Button
       data-testid="send-button"
-      className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
+      className="rounded-full p-1.5 h-fit border dark:border-zinc-600 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white shadow-md"
       onClick={(event) => {
         event.preventDefault();
         submitForm();

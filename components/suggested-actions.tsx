@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
+import { BoxIcon, RouteIcon, InvoiceIcon, GlobeIcon } from './icons';
 import { memo } from 'react';
 import type { UseChatHelpers } from '@ai-sdk/react';
 import type { VisibilityType } from './visibility-selector';
@@ -19,24 +20,28 @@ function PureSuggestedActions({
 }: SuggestedActionsProps) {
   const suggestedActions = [
     {
-      title: 'What are the advantages',
-      label: 'of using Next.js?',
-      action: 'What are the advantages of using Next.js?',
+      title: 'Create a meal plan',
+      label: 'for muscle gain',
+      action: 'Create a weekly meal plan focused on muscle gain.',
+      icon: <BoxIcon size={20} />,
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: 'Suggest a workout',
+      label: 'for fat loss',
+      action: 'Suggest a 30-minute workout routine for fat loss.',
+      icon: <RouteIcon size={20} />,
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
+      title: 'Track my calories',
+      label: 'for today',
+      action: 'Help me track my calorie intake for today.',
+      icon: <InvoiceIcon size={20} />,
     },
     {
-      title: 'What is the weather',
-      label: 'in San Francisco?',
-      action: 'What is the weather in San Francisco?',
+      title: 'Give hydration tips',
+      label: 'for active people',
+      action: 'What are the best hydration tips for someone with an active lifestyle?',
+      icon: <GlobeIcon size={20} />,
     },
   ];
 
@@ -64,9 +69,14 @@ function PureSuggestedActions({
                 content: suggestedAction.action,
               });
             }}
-            className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start"
+            className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-2 sm:flex-col w-full h-auto justify-start items-start transition-all duration-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:shadow-lg hover:scale-[1.03] focus-visible:bg-zinc-100 focus-visible:dark:bg-zinc-800 focus-visible:shadow-lg focus-visible:scale-[1.03] hover:text-black focus-visible:text-black"
           >
-            <span className="font-medium">{suggestedAction.title}</span>
+            <span className="flex items-center gap-2">
+              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 shadow-md text-white">
+                {suggestedAction.icon}
+              </span>
+              <span className="font-medium">{suggestedAction.title}</span>
+            </span>
             <span className="text-muted-foreground">
               {suggestedAction.label}
             </span>

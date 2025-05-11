@@ -66,7 +66,7 @@ export function MessageEditor({
         <Button
           data-testid="message-editor-send-button"
           variant="default"
-          className="h-fit py-2 px-3"
+          className="h-fit py-2 px-3 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 text-white shadow-md"
           disabled={isSubmitting}
           onClick={async () => {
             setIsSubmitting(true);
