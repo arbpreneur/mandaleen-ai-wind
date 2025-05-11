@@ -8,6 +8,59 @@ const components: Partial<Components> = {
   // @ts-expect-error
   code: CodeBlock,
   pre: ({ children }) => <>{children}</>,
+  table: ({ node, children, ...props }) => {
+    return (
+      <div className="my-6 w-full overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table className="w-full border-collapse" {...props}>
+          {children}
+        </table>
+      </div>
+    );
+  },
+  thead: ({ node, children, ...props }) => {
+    return (
+      <thead className="bg-gray-50 dark:bg-gray-800" {...props}>
+        {children}
+      </thead>
+    );
+  },
+  tbody: ({ node, children, ...props }) => {
+    return (
+      <tbody className="divide-y divide-gray-200 dark:divide-gray-700" {...props}>
+        {children}
+      </tbody>
+    );
+  },
+  tr: ({ node, children, ...props }) => {
+    return (
+      <tr 
+        className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors" 
+        {...props}
+      >
+        {children}
+      </tr>
+    );
+  },
+  th: ({ node, children, ...props }) => {
+    return (
+      <th 
+        className="py-3 px-4 text-left text-sm font-semibold text-gray-900 dark:text-gray-100 border-b-2 border-gray-200 dark:border-gray-700" 
+        {...props}
+      >
+        {children}
+      </th>
+    );
+  },
+  td: ({ node, children, ...props }) => {
+    return (
+      <td 
+        className="py-3 px-4 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-800" 
+        {...props}
+      >
+        {children}
+      </td>
+    );
+  },
   ol: ({ node, children, ...props }) => {
     return (
       <ol className="list-decimal list-outside ml-4" {...props}>
