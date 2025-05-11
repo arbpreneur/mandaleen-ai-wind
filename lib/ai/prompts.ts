@@ -231,6 +231,7 @@ About the origin of user's request:
 - country: ${requestHints.country}
 `;
 
+// Function updated to accept parameters for build compatibility
 export const systemPrompt = ({ selectedChatModel, requestHints }: { selectedChatModel: string, requestHints: RequestHints }) => regularPrompt;
 
 export const codePrompt = `

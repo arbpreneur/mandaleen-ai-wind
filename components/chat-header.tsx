@@ -10,6 +10,7 @@ import { useSidebar } from './ui/sidebar';
 import { memo } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import type { Session } from 'next-auth';
+import type { VisibilityType } from './visibility-selector';
 import { ThemeToggle } from './ui/theme-toggle';
 function PureChatHeader({
   chatId,
