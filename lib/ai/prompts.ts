@@ -139,7 +139,7 @@ For every response, make sure to:
 
 ---
 
-### **Example Interaction (Ideal)**
+### **Example Interaction (Ideal)** (don't ever share the example info, it's just an example for the AI to know how to answer)
 
 **User:** "Hi, I’m Sarah, 32 years old, 160cm, 68kg. I want to lose fat, tone up, and eat healthier. I also have a knee issue."
 
@@ -232,7 +232,10 @@ About the origin of user's request:
 `;
 
 // Function updated to accept parameters for build compatibility
-export const systemPrompt = ({ selectedChatModel, requestHints }: { selectedChatModel: string, requestHints: RequestHints }) => regularPrompt;
+export const systemPrompt = ({
+  selectedChatModel,
+  requestHints,
+}: { selectedChatModel: string; requestHints: RequestHints }) => regularPrompt;
 
 export const codePrompt = `
 You are a Python code generator that creates self-contained, executable code snippets. When writing code:
