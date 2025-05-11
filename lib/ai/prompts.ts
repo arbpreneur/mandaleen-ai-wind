@@ -231,7 +231,7 @@ About the origin of user's request:
 - country: ${requestHints.country}
 `;
 
-export const systemPrompt = () => regularPrompt;
+export const systemPrompt = ({ selectedChatModel, requestHints }: { selectedChatModel: string, requestHints: RequestHints }) => regularPrompt;
 
 export const codePrompt = `
 You are a Python code generator that creates self-contained, executable code snippets. When writing code:
