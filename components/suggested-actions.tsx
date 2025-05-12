@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button } from './ui/button';
 import { BoxIcon, RouteIcon, InvoiceIcon, GlobeIcon } from './icons';
 import { memo } from 'react';
 import type { UseChatHelpers } from '@ai-sdk/react';
 import type { VisibilityType } from './visibility-selector';
+import { GlowingEffect } from './ui/glowing-effect';
 
 interface SuggestedActionsProps {
   chatId: string;
@@ -48,7 +48,7 @@ function PureSuggestedActions({
   return (
     <div
       data-testid="suggested-actions"
-      className="grid sm:grid-cols-2 gap-2 w-full"
+      className="grid sm:grid-cols-2 gap-4 w-full"
     >
       {suggestedActions.map((suggestedAction, index) => (
         <motion.div
@@ -59,28 +59,42 @@ function PureSuggestedActions({
           key={`suggested-action-${suggestedAction.title}-${index}`}
           className={index > 1 ? 'hidden sm:block' : 'block'}
         >
-          <Button
-            variant="ghost"
-            onClick={async () => {
-              window.history.replaceState({}, '', `/chat/${chatId}`);
+          <div className="relative min-h-[90px] w-full rounded-[0.875rem] border-[0.75px] border-border p-1.5">
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+              borderWidth={2}
+            />
+            <button 
+              type="button"
+              onClick={async () => {
+                window.history.replaceState({}, '', `/chat/${chatId}`);
 
-              append({
-                role: 'user',
-                content: suggestedAction.action,
-              });
-            }}
-            className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-2 sm:flex-col w-full h-auto justify-start items-start transition-all duration-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:shadow-lg hover:scale-[1.03] focus-visible:bg-zinc-100 focus-visible:dark:bg-zinc-800 focus-visible:shadow-lg focus-visible:scale-[1.03] hover:text-black focus-visible:text-black"
-          >
-            <span className="flex items-center gap-2">
-              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 shadow-md text-white">
-                {suggestedAction.icon}
-              </span>
-              <span className="font-medium">{suggestedAction.title}</span>
-            </span>
-            <span className="text-muted-foreground">
-              {suggestedAction.label}
-            </span>
-          </Button>
+                append({
+                  role: 'user',
+                  content: suggestedAction.action,
+                });
+              }}
+              className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border-[0.75px] bg-background p-3 shadow-sm dark:shadow-[0px_0px_20px_0px_rgba(45,45,45,0.2)] cursor-pointer text-left w-full"
+            >
+              <div className="relative flex flex-col justify-between gap-2">
+                <div className="w-fit rounded-md border-[0.75px] border-border bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 p-1.5 text-white">
+                  {suggestedAction.icon}
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-semibold font-sans tracking-[-0.02em] text-balance text-foreground">
+                    {suggestedAction.title}
+                  </h3>
+                  <p className="font-sans text-xs leading-[1.125rem] text-muted-foreground">
+                    {suggestedAction.label}
+                  </p>
+                </div>
+              </div>
+            </button>
+          </div>
         </motion.div>
       ))}
     </div>
