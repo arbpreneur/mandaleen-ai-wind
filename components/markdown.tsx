@@ -4,6 +4,16 @@ import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from './code-block';
 
+// Helper function to detect RTL text (primarily Arabic)
+const isRTLText = (text: string): boolean => {
+  // RTL Unicode ranges primarily for Arabic
+  const rtlChars = /[\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC]/;
+  // Check if there are RTL characters in the text
+  // We consider text as RTL if we find RTL characters early in the string
+  const firstFewChars = text.substring(0, Math.min(100, text.length));
+  return rtlChars.test(firstFewChars);
+};
+
 const components: Partial<Components> = {
   // @ts-expect-error
   code: CodeBlock,
@@ -149,10 +159,15 @@ const components: Partial<Components> = {
 const remarkPlugins = [remarkGfm];
 
 const NonMemoizedMarkdown = ({ children }: { children: string }) => {
+  // Check if the text is RTL (e.g., Arabic)
+  const isRTL = isRTLText(children);
+  
   return (
-    <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
-      {children}
-    </ReactMarkdown>
+    <div dir={isRTL ? "rtl" : "ltr"} style={isRTL ? { textAlign: 'right' } : {}}>
+      <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
+        {children}
+      </ReactMarkdown>
+    </div>
   );
 };
 
